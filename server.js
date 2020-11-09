@@ -8,6 +8,8 @@ import connectDB from './config/db'
 
 // Route Files
 import bootcamps from "./routes/bootcamps";
+import courses from "./routes/courses";
+
 
 // Middleware Logger
 // import logger from './middleware/logger';
@@ -31,6 +33,7 @@ if(process.env.NODE_ENV === 'developmet'){
 }
 
 app.use("/api/v1/bootcamps", bootcamps);
+app.use("/api/v1/courses", courses);
 
 app.use(errorHandler)
 
@@ -41,7 +44,7 @@ const server = app.listen(PORT || 5000, () => {
 
 // Handle Unhandled Promise Rejections
 process.on('unhandledRejection', (err, promise) => {
-    console.log(`Error: ${err.message}`.red)
+    // console.log(`Error: ${err.message}`.red)
     // close server and exit process
     server.close(() => {
         process.exit(1);
