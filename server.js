@@ -10,7 +10,10 @@ import connectDB from './config/db'
 import bootcamps from "./routes/bootcamps";
 
 // Middleware Logger
-import logger from './middleware/logger';
+// import logger from './middleware/logger';
+
+// Error Handler
+import errorHandler from './middleware/error'
 
 // Load env vars
 dotenv.config({ path: "./config/config.env" });
@@ -26,8 +29,10 @@ app.use(express.json())
 if(process.env.NODE_ENV === 'developmet'){
     app.use(morgan('dev'));
 }
-app.use(logger)
+
 app.use("/api/v1/bootcamps", bootcamps);
+
+app.use(errorHandler)
 
 const PORT = process.env.PORT;
 const server = app.listen(PORT || 5000, () => {
